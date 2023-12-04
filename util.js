@@ -3,7 +3,7 @@ const { messageLink } = require('discord.js');
 const CharacterAI = require("node_characterai");
 const characterAI = new CharacterAI();
 
-let ch = 'ch id';
+let ch = '1090823940148035694';
 
 const characterAi = async (message) => {
   if(message.channel.id !== ch) return;
