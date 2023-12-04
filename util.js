@@ -15,7 +15,7 @@ const characterAi = async (message) => {
     const chat = await characterAI.createOrContinueChat(process.env.caiId);
     const response = await chat.sendAndAwaitResponse(message.content, true)
     console.log(`${message.author.id}: ${message.content}\nKaho: ${response}`)
-    message.reply(response)
+    message.reply(response.text)
   }catch(e) {
     console.log(e.stack);
   }
