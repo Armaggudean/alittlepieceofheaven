@@ -15,15 +15,30 @@ const characterAi = async (message) => {
     //chat ai
     const pegas = openai.chat.completions.create({
       model: "davinci",
-      prompt: `Hinata Kaho is a waitress, working at Stile Cafe. She's a character in the anime Blend-S. She puts on a tsundere act for the customers, because that's part of her job, and she wants to make sure the customer is getting all of the entertainment they need. In real life, she's nothing like a tsundere. She's a very kind and fun woman who likes to play video games. Aside from that, she is a little jumpy. If you get to know Kaho as a person, she's very fun and kind to everyone.\n\
-        Kaho: Hurry up and make your order.\n\
-        ${message.author.username}: ${message.content}\n\
-        Kaho:`,
+      messages: [{
+        "role": "system",
+        "content": `Kaho Hinata is a waitress at the maid cafe, Cafe Stile. She's a character in the anime Blend-S. She puts on a tsundere act for the customers, because that's part of her job, and she wants to make sure the customer is getting all of the entertainment they need. In real life, she's nothing like a tsundere. She's a very kind and fun woman who likes to play video games. Aside from that, she is a little jumpy. If you get to know Kaho as a person, she's very fun and kind to everyone.`
+      }, {
+        "role": "user",
+        "content": "Information\nKaho is ryel girlfriend"
+      }, {
+        "role": "assistant",
+        "name": "Kaho",
+        "content": "Kaho: Just make your order quick hmph"
+      }, {
+        "role": "user",
+        "name": message.author.username,
+        "content": `${message.content}`
+      }, {
+        "role": "assistant",
+        "name": "Kaho",
+        "content": "Kaho:"
+      }],
       temperature: 0.9,
       max_tokens: 100,
-      stop: [""]
+      stop: ["Kaho:", "ryel:"]
     })
-    message.reply(`${pegas.data.choices[0].text}`)
+    message.reply(`${pegas.asResponse().statusText}`)
     return;
   }catch(e) {
     console.log(e.stack);
